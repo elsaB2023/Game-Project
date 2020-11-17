@@ -1377,7 +1377,7 @@ soundfile = function () {
    * @example
    * <div><code>
    *
-   *  var ball = {};
+   *  var Rain = {};
    *  var soundFile;
    *
    *  function setup() {
@@ -1387,14 +1387,14 @@ soundfile = function () {
    *
    *  function draw() {
    *    background(0);
-   *    ball.x = constrain(mouseX, 0, width);
-   *    ellipse(ball.x, height/2, 20, 20)
+   *    Rain.x = constrain(mouseX, 0, width);
+   *    ellipse(Rain.x, height/2, 20, 20)
    *  }
    *
    *  function mousePressed(){
-   *    // map the ball's x location to a panning degree
+   *    // map the Rain's x location to a panning degree
    *    // between -1.0 (left) and 1.0 (right)
-   *    var panning = map(ball.x, 0., width,-1.0, 1.0);
+   *    var panning = map(Rain.x, 0., width,-1.0, 1.0);
    *    soundFile.pan(panning);
    *    soundFile.play();
    *  }
@@ -7505,7 +7505,7 @@ reverb = function () {
    *  <p>Convolution multiplies any audio input by an "impulse response"
    *  to simulate the dispersion of sound over time. The impulse response is
    *  generated from an audio file that you provide. One way to
-   *  generate an impulse response is to pop a balloon in a reverberant space
+   *  generate an impulse response is to pop a Rainoon in a reverberant space
    *  and record the echo. Convolution can also be used to experiment with
    *  sound.</p>
    *

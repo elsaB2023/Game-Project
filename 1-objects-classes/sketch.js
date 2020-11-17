@@ -1,24 +1,63 @@
-//create a variable called b to hold one ball
+
+let b;
+let anotherRain;
+let kite;
+let rain = [];
 
 function setup() {
   createCanvas(800, 400);
+  b = new Rain(0, 100,"red");   
+anotherRain = new Rain(200,20,"green");
 
-  // construct the ball using the 'new' keyword
+
+
+}
+function keyPressed(){ 
+
+  let raindrop = new Rain(random(400),100,"blue");
+rain.push(raindrop);
+print(rain);
 }
 
 
 function draw(){
 	background(220);
- //draw the ball called b (go look in the Ball class for the drawBall function)
- //move the ball called b (go look in the Ball class for the moveBall function)
 
+ b.drawRain();
+ b.moveRain();
+
+ anotherRain.drawRain();
+ anotherRain.moveRain();
+
+
+ for (let i = 0; i < rain.length; i++){
+  rain[i].drawRain();
+     rain[i].moveRain();
+ }
 
 }
 
 
-//ball class from which to create new balls with similar properties.
-class Ball {
 
-  // here is where you'll put the instructions for making balls
 
+
+class Rain {
+
+  constructor(x,y,color){ 
+     this.x = x;
+         this.y = y;
+            this.color = color;
+     }
+     drawRain(){ 
+      stroke(0);
+      fill(this.color);
+      ellipse(this.x,this.y,10,10);
 }
+
+moveRain(){ 
+  this.y = this.y+2;
+}
+ }
+
+
+

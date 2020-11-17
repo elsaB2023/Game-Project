@@ -1,7 +1,7 @@
 
-//create an empty array called balls
+//create an empty array called Rains
 
-let balls = [];
+let Rains = [];
 
 function setup() {
   createCanvas(800, 400);
@@ -11,33 +11,37 @@ function setup() {
 function draw(){
 	background(220);
 
-//	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	    balls[i].drawBall();
-      balls[i].moveBall();
+//	draw all the Rains in that array
+	for (let i = 0; i < Rains.length; i++) {
+	    Rains[i].drawRain();
+      Rains[i].moveRain();
 	  }
 }
 
 function keyPressed(){
   // todo: 
-  //every time you push a key, make a new ball from the ball class and add it to the balls array
+  //every time you push a key, make a new Rain from the Rain class and add it to the Rains array
+  let  b = new Rain(100, 100);
+  Rains.push(b);
+  print(Rains);
+
 }
 
-//ball class from which to create new balls with similar properties.
-class Ball {
+//Rain class from which to create new Rains with similar properties.
+class Rain {
 
-	constructor(x,y){ //every ball needs an x value and a y value
+	constructor(x,y){ //every Rain needs an x value and a y value
 		    this.x = x;
     		this.y = y;
 	}
 
-	drawBall(){  // draw a ball on the screen at x,y
+	drawRain(){  // draw a Rain on the screen at x,y
     		stroke(0);
     		fill("red");
 		    ellipse(this.x,this.y,10,10);
 	}
 
-	moveBall(){ //update the location of the ball, so it moves across the screen
+	moveRain(){ //update the location of the Rain, so it moves across the screen
 		this.x = this.x+2;
 		this.y = this.y+.5;
 	}

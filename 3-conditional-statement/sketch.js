@@ -1,5 +1,5 @@
-//create an empty array called balls
-let balls = [];
+//create an empty array called Rains
+let Rains = [];
 
 //create a variable to hold your avatar
 let me;
@@ -20,16 +20,16 @@ function draw(){
   me.moveMe();
 
   if (frameCount % 25 == 0) {
-      let  b = new Ball(width, random(0,height), -3);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
+      let  b = new Rain(width, random(0,height), -3);
+      Rains.push(b);
+      console.log(Rains); //print the Rains array to the console
     }
 
-//	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
+//	draw all the Rains in that array
+	for (let i = 0; i < Rains.length; i++) {
+	 	      Rains[i].drawRain();
+       	  Rains[i].moveRain();
+        	Rains[i].bounceRain();
 	  }
 
 }
@@ -73,32 +73,32 @@ class Avatar {
 }
 
 
-//ball class from which to create new balls with similar properties.
-class Ball {
+//Rain class from which to create new Rains with similar properties.
+class Rain {
 
-	//every ball needs an x value, a y value, and a speed
+	//every Rain needs an x value, a y value, and a speed
 	constructor(x,y, speed){
 		this.x = x;
     this.y = y;
     this.speed = speed;
 	}
 
-	// draw a ball on the screen at x,y
-	drawBall(){
+	// draw a Rain on the screen at x,y
+	drawRain(){
     	stroke(0);
       strokeWeight(1);
     	fill("red");
 		  ellipse(this.x,this.y,10,10);
 	}
 
-	//update the location of the ball, so it moves across the screen
-	moveBall(){
+	//update the location of the Rain, so it moves across the screen
+	moveRain(){
 		this.x = this.x+ this.speed;
 		this.y = this.y+.5;
 	}
 
-	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceBall(){
+	//if the Rain hits the person, change the speed value to negative (send it in the opposite direction)
+  	bounceRain(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
       			this.speed = -this.speed;
     		}
