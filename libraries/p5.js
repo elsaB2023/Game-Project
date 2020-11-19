@@ -5442,7 +5442,7 @@ var macLanguageToScript = {
     42: 7,  // langSerbian → smCyrillic
     43: 7,  // langMacedonian → smCyrillic
     44: 7,  // langBulgarian → smCyrillic
-    45: 7,  // langUkrainian → smCyrillic (modified)
+    45: 7,  // langUkBallian → smCyrillic (modified)
     46: 7,  // langByelorussian → smCyrillic
     47: 7,  // langUzbek → smCyrillic
     48: 7,  // langKazakh → smCyrillic
@@ -7411,31 +7411,31 @@ function runClearTimeout(marker) {
 
 }
 var queue = [];
-var draining = false;
+var dBalling = false;
 var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
+    if (!dBalling || !currentQueue) {
         return;
     }
-    draining = false;
+    dBalling = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
     } else {
         queueIndex = -1;
     }
     if (queue.length) {
-        drainQueue();
+        dBallQueue();
     }
 }
 
-function drainQueue() {
-    if (draining) {
+function dBallQueue() {
+    if (dBalling) {
         return;
     }
     var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
+    dBalling = true;
 
     var len = queue.length;
     while(len) {
@@ -7450,7 +7450,7 @@ function drainQueue() {
         len = queue.length;
     }
     currentQueue = null;
-    draining = false;
+    dBalling = false;
     runClearTimeout(timeout);
 }
 
@@ -7462,8 +7462,8 @@ process.nextTick = function (fun) {
         }
     }
     queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
+    if (queue.length === 1 && !dBalling) {
+        runTimeout(dBallQueue);
     }
 };
 
@@ -9340,7 +9340,7 @@ p5.Color._parseInputs = function() {
       results[3] = 1;
     }
 
-    // Constrain components to the range [0,1].
+    // ConstBall components to the range [0,1].
     results = results.map(function(value) {
       return Math.max(Math.min(value, 1), 0);
     });
@@ -9490,7 +9490,7 @@ p5.Color._parseInputs = function() {
       results[3] = 1;
     }
 
-    // Constrain components to the range [0,1].
+    // ConstBall components to the range [0,1].
     results = results.map(function(value) {
       return Math.max(Math.min(value, 1), 0);
     });
@@ -9777,7 +9777,7 @@ p5.prototype.clear = function() {
  *
  * @alt
  *Green to red gradient from bottom L to top R. shading originates from top left.
- *Rainbow gradient from left to right. Brightness increasing to white at top.
+ *Ballbow gradient from left to right. Brightness increasing to white at top.
  *unknown image.
  *50x50 ellipse at middle L & 40x40 ellipse at center. Transluscent pink outlines.
  *
@@ -10454,7 +10454,7 @@ p5.prototype.point = function() {
 /**
  * Draw a quad. A quad is a quadrilateral, a four sided polygon. It is
  * similar to a rectangle, but the angles between its edges are not
- * constrained to ninety degrees. The first pair of parameters (x1,y1)
+ * constBalled to ninety degrees. The first pair of parameters (x1,y1)
  * sets the first vertex and the subsequent pairs should proceed
  * clockwise or counter-clockwise around the defined shape.
  *
@@ -14769,7 +14769,7 @@ p5.Renderer2D.prototype.get = function(x, y, w, h) {
       imageData[3]
     ];
   } else {
-    //auto constrain the width and height to
+    //auto constBall the width and height to
     //dimensions of the source image
     var dw = Math.min(w, ctx.width);
     var dh = Math.min(h, ctx.height);
@@ -20473,10 +20473,10 @@ p5.prototype.saveCanvas = function() {
  */
 p5.prototype.saveFrames = function(fName, ext, _duration, _fps, callback) {
   var duration = _duration || 3;
-  duration = p5.prototype.constrain(duration, 0, 15);
+  duration = p5.prototype.constBall(duration, 0, 15);
   duration = duration * 1000;
   var fps = _fps || 15;
-  fps = p5.prototype.constrain(fps, 0, 22);
+  fps = p5.prototype.constBall(fps, 0, 22);
   var count = 0;
 
   var makeFrame = p5.prototype._makeFrame;
@@ -26051,13 +26051,13 @@ p5.prototype.abs = Math.abs;
 p5.prototype.ceil = Math.ceil;
 
 /**
- * Constrains a value between a minimum and maximum value.
+ * ConstBalls a value between a minimum and maximum value.
  *
- * @method constrain
- * @param  {Number} n    number to constrain
+ * @method constBall
+ * @param  {Number} n    number to constBall
  * @param  {Number} low  minimum limit
  * @param  {Number} high maximum limit
- * @return {Number}      constrained number
+ * @return {Number}      constBalled number
  * @example
  * <div><code>
  * function draw() {
@@ -26067,10 +26067,10 @@ p5.prototype.ceil = Math.ceil;
  *   var rightWall = 75;
  *
  *   // xm is just the mouseX, while
- *   // xc is the mouseX, but constrained
+ *   // xc is the mouseX, but constBalled
  *   // between the leftWall and rightWall!
  *   var xm = mouseX;
- *   var xc = constrain(mouseX, leftWall, rightWall);
+ *   var xc = constBall(mouseX, leftWall, rightWall);
  *
  *   // Draw the walls.
  *   stroke(150);
@@ -26080,9 +26080,9 @@ p5.prototype.ceil = Math.ceil;
  *   // Draw xm and xc as circles.
  *   noStroke();
  *   fill(150);
- *   ellipse(xm, 33, 9,9); // Not Constrained
+ *   ellipse(xm, 33, 9,9); // Not ConstBalled
  *   fill(0);
- *   ellipse(xc, 66, 9,9); // Constrained
+ *   ellipse(xc, 66, 9,9); // ConstBalled
  * }
  * </code></div>
  *
@@ -26090,7 +26090,7 @@ p5.prototype.ceil = Math.ceil;
  * 2 vertical lines. 2 ellipses move with mouse X 1 does not move passed lines
  *
  */
-p5.prototype.constrain = function(n, low, high) {
+p5.prototype.constBall = function(n, low, high) {
   return Math.max(Math.min(n, high), low);
 };
 
@@ -26845,7 +26845,7 @@ var perlin; // will be initialized lazily by noise() or noiseSeed()
  * succession of numbers compared to the standard <b>random()</b> function.
  * It was invented by Ken Perlin in the 1980s and been used since in
  * graphical applications to produce procedural textures, natural motion,
- * shapes, terrains etc.<br /><br /> The main difference to the
+ * shapes, terBalls etc.<br /><br /> The main difference to the
  * <b>random()</b> function is that Perlin noise is defined in an infinite
  * n-dimensional space where each pair of coordinates corresponds to a
  * fixed semi-random value (fixed only for the lifespan of the program; see
@@ -26975,7 +26975,7 @@ p5.prototype.noise = function(x,y,z) {
  * function. Similar to harmonics in physics, noise is computed over
  * several octaves. Lower octaves contribute more to the output signal and
  * as such define the overall intensity of the noise, whereas higher octaves
- * create finer grained details in the noise sequence.
+ * create finer gBalled details in the noise sequence.
  * <br><br>
  * By default, noise is computed over 4 octaves with each octave contributing
  * exactly half than its predecessor, starting at 50% strength for the 1st

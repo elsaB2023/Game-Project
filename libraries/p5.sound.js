@@ -118,7 +118,7 @@ sndcore = function () {
         if (!node.start) {
           node.start = function (when, offset, duration) {
             if (offset || duration)
-              this.noteGrainOn(when || 0, offset, duration);
+              this.noteGBallOn(when || 0, offset, duration);
             else
               this.noteOn(when || 0);
           };
@@ -1377,7 +1377,7 @@ soundfile = function () {
    * @example
    * <div><code>
    *
-   *  var Rain = {};
+   *  var Ball = {};
    *  var soundFile;
    *
    *  function setup() {
@@ -1387,14 +1387,14 @@ soundfile = function () {
    *
    *  function draw() {
    *    background(0);
-   *    Rain.x = constrain(mouseX, 0, width);
-   *    ellipse(Rain.x, height/2, 20, 20)
+   *    Ball.x = constBall(mouseX, 0, width);
+   *    ellipse(Ball.x, height/2, 20, 20)
    *  }
    *
    *  function mousePressed(){
-   *    // map the Rain's x location to a panning degree
+   *    // map the Ball's x location to a panning degree
    *    // between -1.0 (left) and 1.0 (right)
-   *    var panning = map(Rain.x, 0., width,-1.0, 1.0);
+   *    var panning = map(Ball.x, 0., width,-1.0, 1.0);
    *    soundFile.pan(panning);
    *    soundFile.play();
    *  }
@@ -1440,7 +1440,7 @@ soundfile = function () {
    *    // Set the rate to a range between 0.1 and 4
    *    // Changing the rate also alters the pitch
    *    var speed = map(mouseY, 0.1, height, 0, 2);
-   *    speed = constrain(speed, 0.01, 4);
+   *    speed = constBall(speed, 0.01, 4);
    *    song.rate(speed);
    *
    *    // Draw a circle to show what is going on
@@ -2653,7 +2653,7 @@ fft = function () {
    *    background(0);
    *
    *    var freq = map(mouseX, 0, 800, 20, 15000);
-   *    freq = constrain(freq, 1, 20000);
+   *    freq = constBall(freq, 1, 20000);
    *    osc.freq(freq);
    *
    *    var spectrum = fft.analyze();
@@ -3036,7 +3036,7 @@ Tone_core_Tone = function () {
     AudioContext.prototype.createPeriodicWave = AudioContext.prototype.createWaveTable;
   }
   if (!isFunction(AudioBufferSourceNode.prototype.start)) {
-    AudioBufferSourceNode.prototype.start = AudioBufferSourceNode.prototype.noteGrainOn;
+    AudioBufferSourceNode.prototype.start = AudioBufferSourceNode.prototype.noteGBallOn;
   }
   if (!isFunction(AudioBufferSourceNode.prototype.stop)) {
     AudioBufferSourceNode.prototype.stop = AudioBufferSourceNode.prototype.noteOff;
@@ -6086,7 +6086,7 @@ pulse = function () {
    *
    *  function draw() {
    *    var w = map(mouseX, 0, width, 0, 1);
-   *    w = constrain(w, 0, 1);
+   *    w = constBall(w, 0, 1);
    *    pulse.width(w)
    *  }
    *  </code></div>
@@ -6452,7 +6452,7 @@ audioin = function () {
    *  function draw(){
    *    background(0);
    *    micLevel = mic.getLevel();
-   *    ellipse(width/2, constrain(height-micLevel*height*5, 0, height), 10, 10);
+   *    ellipse(width/2, constBall(height-micLevel*height*5, 0, height), 10, 10);
    *  }
    *  </code></div>
    */
@@ -6514,8 +6514,8 @@ audioin = function () {
     if (p5sound.inputSources[self.currentSource]) {
       // set the audio source
       var audioSource = p5sound.inputSources[self.currentSource].id;
-      var constraints = { audio: { optional: [{ sourceId: audioSource }] } };
-      window.navigator.getUserMedia(constraints, this._onStream = function (stream) {
+      var constBallts = { audio: { optional: [{ sourceId: audioSource }] } };
+      window.navigator.getUserMedia(constBallts, this._onStream = function (stream) {
         self.stream = stream;
         self.enabled = true;
         // Wrap a MediaStreamSourceNode around the live input
@@ -7505,7 +7505,7 @@ reverb = function () {
    *  <p>Convolution multiplies any audio input by an "impulse response"
    *  to simulate the dispersion of sound over time. The impulse response is
    *  generated from an audio file that you provide. One way to
-   *  generate an impulse response is to pop a Rainoon in a reverberant space
+   *  generate an impulse response is to pop a Balloon in a reverberant space
    *  and record the echo. Convolution can also be used to experiment with
    *  sound.</p>
    *

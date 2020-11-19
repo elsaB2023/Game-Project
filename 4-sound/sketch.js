@@ -1,5 +1,5 @@
-//create an empty array called Rains
-let Rains = [];
+//create an empty array called Balls
+let Balls = [];
 
 //create a variable to hold your avatar
 let me;
@@ -26,16 +26,16 @@ function draw(){
   me.moveMe();
 
   if (frameCount % 25 == 0) {
-      let  b = new Rain(width, random(0,height), -3);
-      Rains.push(b);
-      console.log(Rains); //print the Rains array to the console
+      let  b = new Ball(width, random(0,height), -3);
+      Balls.push(b);
+      console.log(Balls); //print the Balls array to the console
     }
 
-//	draw all the Rains in that array
-	for (let i = 0; i < Rains.length; i++) {
-	 	      Rains[i].drawRain();
-       	  Rains[i].moveRain();
-        	Rains[i].bounceRain();
+//	draw all the Balls in that array
+	for (let i = 0; i < Balls.length; i++) {
+	 	      Balls[i].drawBall();
+       	  Balls[i].moveBall();
+        	Balls[i].bounceBall();
 	  }
 
 }
@@ -79,32 +79,32 @@ class Avatar {
 }
 
 
-//Rain class from which to create new Rains with similar properties.
-class Rain {
+//Ball class from which to create new Balls with similar properties.
+class Ball {
 
-	//every Rain needs an x value, a y value, and a speed
+	//every Ball needs an x value, a y value, and a speed
 	constructor(x,y, speed){
 		this.x = x;
 		this.y = y;
   	this.speed = speed;
 	}
 
-	// draw a Rain on the screen at x,y
-	drawRain(){
+	// draw a Ball on the screen at x,y
+	drawBall(){
 		stroke(0);
   	strokeWeight(1);
 		fill("red");
 		ellipse(this.x,this.y,10,10);
 	}
 
-	//update the location of the Rain, so it moves across the screen
-	moveRain(){
+	//update the location of the Ball, so it moves across the screen
+	moveBall(){
 		this.x = this.x+ this.speed;
 		this.y = this.y+.5;
 	}
 
-	//if the Rain hits the paddle, change the speed value to negative (send it in the opposite direction)
-  	bounceRain(){
+	//if the Ball hits the paddle, change the speed value to negative (send it in the opposite direction)
+  	bounceBall(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
       			this.speed = -this.speed;
             mySound.setVolume(0.1);

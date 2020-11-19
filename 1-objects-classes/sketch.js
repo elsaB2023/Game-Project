@@ -1,13 +1,13 @@
-let rain = [];
+let Ball = [];
 
 function setup() {
   createCanvas(800, 400);
 }
 function keyPressed(){ 
 
-let raindrop = new Rain(random(400),100,"blue");
-rain.push(raindrop);
-print(rain);
+let Balldrop = new Ball(random(400),100,"blue");
+Ball.push(Balldrop);
+print(Ball);
 }
 
 
@@ -16,20 +16,20 @@ function draw(){
 
 }
 
-class Rain {
+class Ball {
 
   constructor(x,y,color){ 
      this.x = x;
      this.y = y;
      this.color = color;
      }
-     drawRain(){ 
+     drawBall(){ 
       //noStroke();
       fill(this.color);
       ellipse(this.x,this.y,10,10);
 }
 
-moveRain(){ 
+moveBall(){ 
   this.y = this.y+2;
   }
 }

@@ -1,7 +1,7 @@
 
-//create an empty array called Rains
+//create an empty array called Balls
 
-let Rains = [];
+let Balls = [];
 
 function setup() {
   createCanvas(1150, 400);
@@ -14,37 +14,37 @@ function draw(){
 	scale(5.0)
 	cloud(15,25,1);
 	cloud(50,25,1);
-//	draw all the Rains in that array
-	for (let i = 0; i < Rains.length; i++) {
-	    Rains[i].drawRain();
-      Rains[i].moveRain();
+//	draw all the Balls in that array
+	for (let i = 0; i < Balls.length; i++) {
+	    Balls[i].drawBall();
+      Balls[i].moveBall();
 	  }
 }
 
 function keyPressed(){
   // todo: 
-  //every time you push a key, make a new Rain from the Rain class and add it to the Rains array
-  let  b = new Rain(random(15,75),30);
-  Rains.push(b);
-  print(Rains);
+  //every time you push a key, make a new Ball from the Ball class and add it to the Balls array
+  let  b = new Ball(random(15,75),30);
+  Balls.push(b);
+  print(Balls);
 
 }
 
-//Rain class from which to create new Rains with similar properties.
-class Rain {
+//Ball class from which to create new Balls with similar properties.
+class Ball {
 
-	constructor(x,y){ //every Rain needs an x value and a y value
+	constructor(x,y){ //every Ball needs an x value and a y value
 		    this.x = x;
     		this.y = y;
 	}
 
-	drawRain(){  // draw a Rain on the screen at x,y
+	drawBall(){  // draw a Ball on the screen at x,y
     		noStroke();
     		fill("#01c2cb");
 		    ellipse(this.x,this.y,2,2);
 	}
 
-	moveRain(){ //update the location of the Rain, so it moves across the screen
+	moveBall(){ //update the location of the Ball, so it moves across the screen
 		this.y = this.y+.5;
 	}
 }

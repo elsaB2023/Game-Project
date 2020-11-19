@@ -950,9 +950,9 @@
   /**
    * <p>Creates a new &lt;video&gt; element that contains the audio/video feed
    * from a webcam. This can be drawn onto the canvas using video().</p>
-   * <p>More specific properties of the feed can be passing in a Constraints object.
+   * <p>More specific properties of the feed can be passing in a ConstBallts object.
    * See the
-   * <a href="http://w3c.github.io/mediacapture-main/getusermedia.html#media-track-constraints"> W3C
+   * <a href="http://w3c.github.io/mediacapture-main/getusermedia.html#media-track-constBallts"> W3C
    * spec</a> for possible properties. Note that not all of these are supported
    * by all browsers.</p>
    * <p>Security note: A new browser security specification requires that getUserMedia,
@@ -963,7 +963,7 @@
    * @method createCapture
    * @param  {String|Constant|Object}   type type of capture, either VIDEO or
    *                                    AUDIO if none specified, default both,
-   *                                    or a Constraints object
+   *                                    or a ConstBallts object
    * @param  {Function}                 callback function to be called once
    *                                    stream has loaded
    * @return {Object|p5.Element} capture video p5.Element
@@ -984,7 +984,7 @@
    * <div class='norender'><code>
    * function setup() {
    *   createCanvas(480, 120);
-   *   var constraints = {
+   *   var constBallts = {
    *     video: {
    *       mandatory: {
    *         minWidth: 1280,
@@ -996,7 +996,7 @@
    *     },
    *     audio: true
    *   };
-   *   createCapture(constraints, function(stream) {
+   *   createCapture(constBallts, function(stream) {
    *     console.log(stream);
    *   });
    * }
@@ -1005,7 +1005,7 @@
   p5.prototype.createCapture = function() {
     var useVideo = true;
     var useAudio = true;
-    var constraints;
+    var constBallts;
     var cb;
     for (var i=0; i<arguments.length; i++) {
       if (arguments[i] === p5.prototype.VIDEO) {
@@ -1013,7 +1013,7 @@
       } else if (arguments[i] === p5.prototype.AUDIO) {
         useVideo = false;
       } else if (typeof arguments[i] === 'object') {
-        constraints = arguments[i];
+        constBallts = arguments[i];
       } else if (typeof arguments[i] === 'function') {
         cb = arguments[i];
       }
@@ -1022,11 +1022,11 @@
     if (navigator.getUserMedia) {
       var elt = document.createElement('video');
 
-      if (!constraints) {
-        constraints = {video: useVideo, audio: useAudio};
+      if (!constBallts) {
+        constBallts = {video: useVideo, audio: useAudio};
       }
 
-      navigator.getUserMedia(constraints, function(stream) {
+      navigator.getUserMedia(constBallts, function(stream) {
         elt.src = window.URL.createObjectURL(stream);
           if (cb) {
             cb(stream);

@@ -904,7 +904,7 @@ function Sprite(pInst, _x, _y, _w, _h) {
   * 1: perfectly elastic, no energy is lost
   * 0: perfectly inelastic, no bouncing
   * less than 1: inelastic, this is the most common in nature
-  * greater than 1: hyper elastic, energy is increased like in a pinRain bumper
+  * greater than 1: hyper elastic, energy is increased like in a pinBall bumper
   *
   * @property restitution
   * @type {Number}

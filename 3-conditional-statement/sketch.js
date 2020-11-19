@@ -1,12 +1,14 @@
-//create an empty array called Rains
-let Rains = [];
+//create an empty array called Balls
+let Balls = [];
 
 //create a variable to hold your avatar
 let me;
+let hearts = 5;
 
 
 function setup() {
   createCanvas(500, 400);
+
 
   //make one avatar called me
   me = new Avatar(width/2, 300, 3);
@@ -18,18 +20,21 @@ function draw(){
 
   me.drawMe();
   me.moveMe();
+  me.die();
 
   if (frameCount % 25 == 0) {
-      let  b = new Rain(width, random(0,height), -3);
-      Rains.push(b);
-      console.log(Rains); //print the Rains array to the console
+      let  b = new Ball(width, random(0,height), -3, -3);
+      Balls.push(b);
+      
     }
 
-//	draw all the Rains in that array
-	for (let i = 0; i < Rains.length; i++) {
-	 	      Rains[i].drawRain();
-       	  Rains[i].moveRain();
-        	Rains[i].bounceRain();
+//	draw all the Balls in that array
+	for (let i = 0; i < Balls.length; i++) {
+	 	    Balls[i].drawBall();
+       	    Balls[i].moveBall();
+			Balls[i].bounceBall();
+			//Balls[i].bounceCornerBall();
+			
 	  }
 
 }
@@ -40,13 +45,13 @@ class Avatar {
 	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
     		this.y = y;
-        this.speed = speed;
+		    this.speed = speed;
 	}
 
 	drawMe(){  // draw the running person
-    		stroke("green");
+    		stroke(0);
         strokeWeight(3);
-    		fill("blue");
+    		fill(0);
 		    ellipse(this.x,this.y,20,20);
         line(this.x,this.y, this.x, this.y+40);
         line(this.x, this.y+40, this.x-20, this.y+60);
@@ -60,48 +65,74 @@ class Avatar {
     if (keyIsDown(UP_ARROW)) { //if you hold the up arrow, move up by speed
        this.y -= this.speed;
     }
-
     if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
         this.y += this.speed;
+	}
+	if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
+        this.x += this.speed;
+	}
+	if (keyIsDown(LEFT_ARROW)) { // if you hold the down arrow, move down by speed
+        this.x -= this.speed;
     }
 	}
 
   die(){
-
+	if(hearts==0){
+		stroke(220);	
+		ellipse(this.x,this.y,20,20);
+        line(this.x,this.y, this.x, this.y+40);
+        line(this.x, this.y+40, this.x-20, this.y+60);
+        line(this.x, this.y+40, this.x+10, this.y+50);
+        line(this.x+10, this.y+50, this.x+5, this.y+60);
+        line(this.x, this.y+15, this.x-10, this.y+25);
+        line(this.x-10, this.y+25, this.x+10, this.y+35);
+	}
   }
 
 }
 
 
-//Rain class from which to create new Rains with similar properties.
-class Rain {
+//Ball class from which to create new Balls with similar properties.
+class Ball {
 
-	//every Rain needs an x value, a y value, and a speed
-	constructor(x,y, speed){
+	//every Ball needs an x value, a y value, and a speed
+	constructor(x,y, speed, yspeed){ //every avatar needs an x value, a y value, and a speed
 		this.x = x;
-    this.y = y;
-    this.speed = speed;
-	}
+		this.y = y;
+		this.speed = speed;
+		//this.yspeed = yspeed;
+}
 
-	// draw a Rain on the screen at x,y
-	drawRain(){
-    	stroke(0);
+	// draw a Ball on the screen at x,y
+	drawBall(){
+    	noStroke();
       strokeWeight(1);
     	fill("red");
 		  ellipse(this.x,this.y,10,10);
 	}
 
-	//update the location of the Rain, so it moves across the screen
-	moveRain(){
+	//update the location of the Ball, so it moves across the screen
+	moveBall(){
 		this.x = this.x+ this.speed;
-		this.y = this.y+.5;
+		//this.y = this.y + this.yspeed;
+		this.y = this.y-5;
 	}
 
-	//if the Rain hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceRain(){
-    		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
-      			this.speed = -this.speed;
+	//if the Ball hits the person, change the speed value to negative (send it in the opposite direction)
+  	bounceBall(){
+    		if (this.x >= me.x-15 || this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
+				  this.speed = -this.speed;
+				 hearts= hearts-1;
+				 print(hearts);
     		}
-  	}
+	  }
+	bounceCornerBall(){
+		if (this.x>=500 || this.x<=0){
+			this.speed = -this.speed;	
+		}
+		if(this.y>=400 ||this.y<=0){
+			this.yspeed = -this.yspeed;
+		}
+	}
 
 }
