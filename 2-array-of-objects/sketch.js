@@ -1,20 +1,33 @@
 
-//create an empty array called Balls
 
 let Balls = [];
+let mySound;
+var xCoord1 = 0;
+var yCoord1 = 0;
+var xCoord2 = 0;
+var yCoord2 = 0;
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  mySound = loadSound('water.mp3');
+}
+
 
 function setup() {
-  createCanvas(1150, 400);
+  createCanvas(1000, 400);
+ xCoord2 = 0;
+ yCoord2 = height / 2;
+  //drawBackground();
 
 }
 
 function draw(){
-	background(220);
+	background(0);
 	translate(0,0)
 	scale(5.0)
 	cloud(15,25,1);
 	cloud(50,25,1);
-//	draw all the Balls in that array
+
 	for (let i = 0; i < Balls.length; i++) {
 	    Balls[i].drawBall();
       Balls[i].moveBall();
@@ -22,29 +35,33 @@ function draw(){
 }
 
 function keyPressed(){
-  // todo: 
-  //every time you push a key, make a new Ball from the Ball class and add it to the Balls array
-  let  b = new Ball(random(15,75),30);
-  Balls.push(b);
-  print(Balls);
 
+	if (keyCode === LEFT_ARROW) {
+		let  b = new Ball(random(15,75),30);
+		Balls.push(b);
+		print(Balls);
+		mySound.setVolume(0.1);
+		mySound.play();
+	  } else if (keyCode === RIGHT_ARROW) {
+		lightning();
+		}
 }
 
-//Ball class from which to create new Balls with similar properties.
+
 class Ball {
 
-	constructor(x,y){ //every Ball needs an x value and a y value
+	constructor(x,y){ 
 		    this.x = x;
     		this.y = y;
 	}
 
-	drawBall(){  // draw a Ball on the screen at x,y
+	drawBall(){ 
     		noStroke();
     		fill("#01c2cb");
 		    ellipse(this.x,this.y,2,2);
 	}
 
-	moveBall(){ //update the location of the Ball, so it moves across the screen
+	moveBall(){ 
 		this.y = this.y+.5;
 	}
 }
@@ -56,4 +73,39 @@ function cloud(x, y, size) {
 	arc(x + 10, y, 25 * size, 45 * size, PI + TWO_PI, TWO_PI);
 	arc(x + 25, y, 25 * size, 35 * size, PI + TWO_PI, TWO_PI);
 	arc(x + 40, y, 30 * size, 20 * size, PI + TWO_PI, TWO_PI);
+}
+
+function setup() {
+  createCanvas(400, 400);
+  drawBackground();
+  xCoord2 = 0;
+  yCoord2 = height / 2;
+}
+
+function drawBackground() {
+  for (var i = 0; i < 500; i++) {
+    stroke(i - 255, 30, 50);
+    line(0, i, width, i);
+  }
+}
+
+function lightning() {
+	for (var i = 0; i < 200; i++) {
+	  xCoord1 = xCoord2;
+	  yCoord1 = yCoord2;
+	  xCoord2 = xCoord1 + int(random(-20, 20));
+	  yCoord2 = yCoord1 + int(random(-10, 20));
+	  strokeWeight(random(1, 3));
+	  strokeJoin(MITER);
+	  line(xCoord1, yCoord1, xCoord2, yCoord2);
+  
+	  if ((xCoord2 > width) | (xCoord2 < 0) | (yCoord2 > height) | (yCoord2 < 0)) {
+		clear();
+		//drawBackground();
+		xCoord2 = int(random(15,75));
+		yCoord2 = 0;
+		stroke(255, 255, random(0, 255));
+	  }
+	  print("i ran")
+	}
 }
