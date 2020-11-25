@@ -8,14 +8,11 @@ html, body {
 }
 
 body {
+  background-color:#14243f;
   margin: 0;
   display: flex;
   flex-direction: column;
-
-  /* This centers our sketch horizontally. */
   justify-content: center;
-
-  /* This centers our sketch vertically. */
   align-items: center;
 }
 
@@ -24,7 +21,17 @@ body {
       padding: 3vh;
       text-align: center;
       margin:0;
-      padding:0;
+      
+  }
+
+  h1{
+    padding:0;
+    color:#01c2cb;
+  }
+
+  h3{
+    padding:20;
+    color:#fdaf16;
   }
 
   
